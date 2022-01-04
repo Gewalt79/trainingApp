@@ -1,23 +1,24 @@
 import React from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-//import useToken from "./useToken";
+import useToken from "./useToken";
 
 import "./App.css";
 import Login from "./Login";
 import Start from "./Start";
 import Register from "./Register";
 import Dashboard from "./Dashboard";
-
+//ПОДКЛЮЧИТЬ РЕДАКС И СДЕЛАТЬ ПЕРЕНАПРАВЛЕНИЕ НА <Dashboard /> ЕСЛИ ТОКЕН ЕСТЬ
+//ЕСЛИ НЕТУ ТО НА <Start />
 function App() {
-  //const { token, setToken } = useToken();
+  const { token, setToken } = useToken();
   return (
     <div className="App">
-      <p className="logo">Logotype</p>
+      <p className="logo">Logotype</p> {token}
       <BrowserRouter>
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} /> :
           <Route path="/start" element={<Start />} />
-          <Route path="/login" element={<Login /*setToken={setToken}*/ />} />
+          <Route path="/login" element={<Login setToken={setToken} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/*" element={<Navigate to="/start" />} />
         </Routes>

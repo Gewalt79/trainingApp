@@ -1,26 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-async function loginUser(credentials) {
-  return fetch("http://localhost:3000/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(credentials),
-  }).then(res => console.log(res.json()))
-}
 
-function Login() {
+function Login({setToken}) {
+
   const [username, setUsername] = React.useState();
   const [password, setPassword] = React.useState();
+
+  async function loginUser(credentials) {
+    return fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        //Сделать присвоение токена
+        setToken(data.token)
+      });
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await loginUser({
       username,
       password,
-    });
+    })
   };
 
   return (

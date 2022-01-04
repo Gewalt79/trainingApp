@@ -8,7 +8,14 @@ async function registerUser(credentials) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(credentials),
-  }).then();
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      //Сделать оповещение о регистрации
+      console.log(data.message);
+    });
 }
 
 function Register() {
@@ -23,6 +30,9 @@ function Register() {
       password,
       repeatPassword,
     });
+    setPassword('')
+    setUsername('')
+    setRepeatPassword('')
     //setToken(token);
     //console.log(token)
   };

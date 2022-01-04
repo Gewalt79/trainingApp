@@ -4,6 +4,7 @@ const db = require("../models/db.js");
 const bcrypt = require("bcryptjs");
 const { v4: uuidv4 } = require("uuid");
 
+
 let auth = function (req, res, next) {
   db.getToken(req.headers.authorization)
     .then((results) => {
@@ -56,7 +57,7 @@ router.post("/registration", (req, res, next) => {
           };
           db.add("users", data)
             .then((results) => {
-              res.json({
+              res.send({
                 message: "Пользователь добавлен: " + req.body.username,
               });
               console.log("Пользователь добавлен в бд: " + req.body.username);
@@ -93,8 +94,11 @@ router.post("/login", (req, res, next) => {
             db.add("token", data)
               .then((results) => {
                 console.log(results.token);
-                console.log("RESULTS.TOKEN")
-                res.json(results.token);
+                console.log("RESULTS.TOKEN");
+                res.send({
+                  token: results.token,
+                  message: "Пользователь успешно авторизован!",
+                });
               })
               .catch((err) => {
                 next(err);
