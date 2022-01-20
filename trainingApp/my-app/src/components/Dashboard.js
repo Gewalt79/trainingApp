@@ -1,3 +1,4 @@
+import { useEffect } from "react"; //Сделать fetch юзернейма с бд при загрузке
 import React from "react";
 
 function Dashboard() {

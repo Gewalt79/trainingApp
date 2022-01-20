@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
-function Login({setToken}) {
-
+function Login({ setToken }) {
   const [username, setUsername] = React.useState();
   const [password, setPassword] = React.useState();
 
@@ -19,8 +17,8 @@ function Login({setToken}) {
         return response.json();
       })
       .then(function (data) {
-        //Сделать присвоение токена
-        setToken(data.token)
+        //Присвоение токена
+        setToken(data.token);
       });
   }
 
@@ -29,7 +27,7 @@ function Login({setToken}) {
     await loginUser({
       username,
       password,
-    })
+    });
   };
 
   return (
