@@ -4,6 +4,7 @@ const db = require("../models/db.js");
 const bcrypt = require("bcryptjs");
 const { v4: uuidv4 } = require("uuid");
 
+
 let auth = function (req, res, next) {
   db.getToken(req.headers.authorization)
     .then((results) => {
@@ -29,7 +30,13 @@ const isValidPassword = function (user, password) {
   return bcrypt.compareSync(password, user.password);
 };
 
-router.post("/dashboard", auth, (req, res) => {
+router.get("/", (req, res) => {
+  res.json({
+    message: "Добро пожаловать!",
+  });
+});
+
+router.get("/secret", auth, (req, res) => {
   res.json({
     message: "Секретная страница!",
   });

@@ -7,15 +7,16 @@ import Login from "./Login";
 import Start from "./Start";
 import Register from "./Register";
 import Dashboard from "./Dashboard";
-
-export default function App() {
-  const { token, setToken, removeToken } = useToken();
+//ПОДКЛЮЧИТЬ РЕДАКС И СДЕЛАТЬ ПЕРЕНАПРАВЛЕНИЕ НА <Dashboard /> ЕСЛИ ТОКЕН ЕСТЬ
+//ЕСЛИ НЕТУ ТО НА <Start />
+function App() {
+  const { token, setToken } = useToken();
   return (
     <div className="App">
       <p className="logo">Logotype</p> {token}
       <BrowserRouter>
         <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} /> :
           <Route path="/start" element={<Start />} />
           <Route path="/login" element={<Login setToken={setToken} />} />
           <Route path="/register" element={<Register />} />
@@ -25,3 +26,5 @@ export default function App() {
     </div>
   );
 }
+
+export default App;
