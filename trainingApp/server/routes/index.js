@@ -97,6 +97,7 @@ router.post("/login", (req, res, next) => {
                 console.log("RESULTS.TOKEN");
                 res.send({
                   token: results.token,
+                  user: req.body.username, //Под вопросом
                   message: "Пользователь успешно авторизован!",
                 });
               })
@@ -114,9 +115,11 @@ router.post("/login", (req, res, next) => {
       }
     })
     .catch((err) => {
-      next(err);
+      res.send({
+        message: "User not found in database"
+      });
+      console.log("User not found in database")
     });
-  console.log("user: " + req.body.username + " connected");
 });
 
 module.exports = router;

@@ -6,7 +6,7 @@ const baza = "database_baza";
 const CLIENT = new MongoClient(url);
 
 CLIENT.connect(async function (err, client) {
-  console.log("Connected correctly to server");
+  console.log("Connected to database");
   CLIENT.db(baza).collection("users").insertOne;
 });
 

@@ -1,10 +1,13 @@
-import React from "react";
+import React from 'react';
+import { AuthContext } from './Context';
 
 function Dashboard() {
+  const value = React.useContext(AuthContext);
+
   return (
-    <div>
-      <h1>dashboard</h1>
-    </div>
+      <div className="dashboard">
+        <p>Hello, {value.username}</p>
+      </div>
   );
 }
 
